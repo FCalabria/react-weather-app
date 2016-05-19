@@ -1,0 +1,41 @@
+{
+    "coord": {
+        "lon": 145.77,
+        "lat": -16.92
+    },
+    "weather": [
+        {
+            "id": 521,
+            "main": "Rain",
+            "description": "chubasco",
+            "icon": "09n"
+        }
+    ],
+    "base": "cmc stations",
+    "main": {
+        "temp": 23.09,
+        "pressure": 1013,
+        "humidity": 78,
+        "temp_min": 18.89,
+        "temp_max": 25
+    },
+    "wind": {
+        "speed": 5.7,
+        "deg": 160
+    },
+    "clouds": {
+        "all": 75
+    },
+    "dt": 1463692508,
+    "sys": {
+        "type": 1,
+        "id": 8166,
+        "message": 0.0031,
+        "country": "AU",
+        "sunrise": 1463603706,
+        "sunset": 1463644300
+    },
+    "id": 2172797,
+    "name": "Cairns",
+    "cod": 200
+}
