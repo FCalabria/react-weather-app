@@ -1,13 +1,11 @@
+@import 'Variables';
 .searchblock-component {
-  box-sizing: border-box;;
-  float: left;
+  @include boxDashedBorder(#f00);
   width: 50%;
-  padding: 5px;
-  border: 1px dashed #f00;
   input {
     color: white;
-    font-family: Courier New, Courier, monospace;
-    border: 1px dotted #889;
+    font-family: $mainFont;
+    border: 1px dotted ;
     background-color: #222;
     margin: 5px 0px;
     padding: 3px;

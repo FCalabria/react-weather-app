@@ -1,3 +1,14 @@
+@import 'Variables';
 .resultslist-component {
-  border: 1px dashed #0f0;
+  @include boxDashedBorder(#0f0);
+  width: 100%;
+  ul {
+    list-style-type: square;
+    a {
+      cursor: pointer;
+      &:hover {
+        color: Darkgreen;
+      }
+    }
+  }
 }

@@ -1,0 +1,8 @@
+$mainFont: Courier New, Courier, monospace;
+@mixin boxDashedBorder($color) {
+    font-family: $mainFont;
+    padding: 5px;
+    border: 1px dashed $color;
+    box-sizing: border-box;
+    float: left;
+}

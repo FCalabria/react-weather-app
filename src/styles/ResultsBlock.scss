@@ -1,7 +1,5 @@
+@import 'Variables';
 .resultsblock-component {
-  box-sizing: border-box;
-  float: left;
+  @include boxDashedBorder(#00f);
   width: 50%;
-  padding: 5px;
-  border: 1px dashed #00f;
 }
