@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import _ from 'lodash';
-let EventEmitter = require('events').EventEmitter;
+const EventEmitter = require('events').EventEmitter;
 
 let fullCitiesList = [];
 let suggestedCities = [];
@@ -14,11 +14,11 @@ function searchSuggestedCities(city) {
   let filtered = _.filter(fullCitiesList, (cityObject) => cityObject.name.toLowerCase().indexOf(city) === 0);
   let outOfWhile = false;
   while (filtered.length < 5 && !outOfWhile) {
-    let toPush = _.find(fullCitiesList, (cityObject) => filtered.indexOf(cityObject) === -1 && cityObject.name.toLowerCase().indexOf(city) !== -1);
+    const toPush = _.find(fullCitiesList, (cityObject) => filtered.indexOf(cityObject) === -1 && cityObject.name.toLowerCase().indexOf(city) !== -1);
     toPush !== undefined ? filtered.push(toPush) : outOfWhile = true;
   }
-  //TODO: sort list alphabetically &/or by country. Preferently, detect user country and put that cities first.
-  suggestedCities = filtered;
+  //TODO: Detect user country and put that cities first.
+  suggestedCities = _.sortBy(filtered, ['country', 'name']);
 }
 
 const SearchBlockStore = _.extend({}, EventEmitter.prototype, {
@@ -37,22 +37,16 @@ const SearchBlockStore = _.extend({}, EventEmitter.prototype, {
 AppDispatcher.register(function(action) {
 
   switch(action.actionType) {
-
     case 'RECEIVE_CITIES':
       setCities(action.cities);
       break;
-
     case 'SEARCH_CITY':
       searchSuggestedCities(action.city);
       break;
-
     default:
       return true;
   }
-
-  // If action was responded to, emit change event
   SearchBlockStore.emitChange();
-
   return true;
 
 });

@@ -7,7 +7,6 @@ import ResultsBlockStore from 'stores/ResultsBlockStore';
 require('styles//ResultsBlock.scss');
 
 var vm;
-
 class ResultsBlockComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -44,7 +43,7 @@ class ResultsBlockComponent extends React.Component {
     }
   }
   render() {
-    let forecast = this.state.forecast;
+    const forecast = this.state.forecast;
     let classes = '';
     let iconUrl = '';
     if (forecast.weather[0].icon === '') {
@@ -52,8 +51,7 @@ class ResultsBlockComponent extends React.Component {
     } else {
       iconUrl = 'http://openweathermap.org/img/w/' + forecast.weather[0].icon + '.png';
     }
-    return (
-      <div className='resultsblock-component'>
+    return <div className='resultsblock-component'>
         <pre>ResultsBlock</pre>
         <h2 className={classes}>{forecast.name}, {forecast.sys.country}</h2>
         <div className={classes}>
@@ -64,8 +62,7 @@ class ResultsBlockComponent extends React.Component {
             <p>Max/min: {forecast.main.temp_max}/{forecast.main.temp_min}</p>
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
   onChange() {
     vm.setState({
@@ -75,9 +72,6 @@ class ResultsBlockComponent extends React.Component {
 }
 
 ResultsBlockComponent.displayName = 'ResultsBlockComponent';
-
-// Uncomment properties you need
-// ResultsBlockComponent.propTypes = {};
 ResultsBlockComponent.defaultProps = {
   cityId: ''
 };

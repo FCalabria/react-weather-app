@@ -1,4 +1,4 @@
 import flux from 'flux';
-let Dispatcher = flux.Dispatcher;
+const Dispatcher = flux.Dispatcher;
 
 module.exports = new Dispatcher();

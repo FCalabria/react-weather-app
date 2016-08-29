@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import _ from 'lodash';
-let EventEmitter = require('events').EventEmitter;
+const EventEmitter = require('events').EventEmitter;
 
 let forecast;
 
@@ -23,18 +23,13 @@ const ResultsBlockStore = _.extend({}, EventEmitter.prototype, {
 AppDispatcher.register(function(action) {
 
   switch(action.actionType) {
-
     case 'RECEIVE_WEATHER':
       setForecast(action.forecast);
       break;
-
     default:
       return true;
   }
-
-  // If action was responded to, emit change event
   ResultsBlockStore.emitChange();
-
   return true;
 
 });

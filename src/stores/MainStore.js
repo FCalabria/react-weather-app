@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import _ from 'lodash';
-let EventEmitter = require('events').EventEmitter;
+const EventEmitter = require('events').EventEmitter;
 let city = {
   name: '',
   _id: ''
@@ -28,11 +28,9 @@ AppDispatcher.register(function(action) {
     case 'SET_CITY':
       setCity(action.city);
       break;
-
     default:
       return true;
   }
-  // If action was responded to, emit change event
   MainStore.emitChange();
   return true;
 });

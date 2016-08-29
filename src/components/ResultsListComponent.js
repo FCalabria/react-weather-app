@@ -13,19 +13,17 @@ class ResultsListComponent extends React.Component {
     MainActions.setCity(cityObject);
   }
   render() {
-    let results = this.props.results.map((result) =>
+    const results = this.props.results.map((result) =>
       <li key={result._id}>
         <a onClick={this.selectCity.bind(this, result)}>{result.name}, {result.country}</a>
       </li>
     )
-    return (
-      <div className="resultslist-component">
+    return <div className="resultslist-component">
         <pre>ResultsList</pre>
         <ul>
           {results}
         </ul>
-      </div>
-    );
+      </div>;
   }
 }
 

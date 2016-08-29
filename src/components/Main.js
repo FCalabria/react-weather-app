@@ -6,7 +6,7 @@ import MainStore from '../stores/MainStore';
 import SearchBlockComponent from './SearchBlockComponent';
 import ResultsBlockComponent from './ResultsBlockComponent';
 
-let vm;
+var vm;
 class AppComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -23,13 +23,11 @@ class AppComponent extends React.Component {
     MainStore.removeChangeListener(this.onChange);
   }
   render() {
-    return (
-      <div className="index">
+    return <div className="index">
         <pre>App</pre>
         <SearchBlockComponent city={this.props.city}/>
         <ResultsBlockComponent cityId={this.state.cityId}/>
-      </div>
-    );
+      </div>;
   }
   onChange() {
     const city = MainStore.getCity();

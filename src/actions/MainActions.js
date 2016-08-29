@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 
-let MainActions = {
+const MainActions = {
   setCity(cityObject) {
     AppDispatcher.dispatch({
       actionType: 'SET_CITY',

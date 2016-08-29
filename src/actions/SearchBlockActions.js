@@ -1,11 +1,14 @@
+import $ from 'jquery';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 
-let SearchBlockActions = {
-  receiveCities(citiesArray) {
-    AppDispatcher.dispatch({
-      actionType: 'RECEIVE_CITIES',
-      cities: citiesArray
-    })
+const SearchBlockActions = {
+  getCities() {
+    $.getJSON('sources/city.list.json')
+      .done((data) => AppDispatcher.dispatch({
+        actionType: 'RECEIVE_CITIES',
+        cities: data
+      }))
+      .fail((error) => alert(error));
   },
 
   searchCity(city) {
