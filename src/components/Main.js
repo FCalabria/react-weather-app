@@ -2,40 +2,42 @@ require('normalize.css');
 require('styles/App.scss');
 
 import React from 'react';
-import WeatherAppStore from '../stores/WeatherAppStore';
+import MainStore from '../stores/MainStore';
 import SearchBlockComponent from './SearchBlockComponent';
 import ResultsBlockComponent from './ResultsBlockComponent';
 
-
+let vm;
 class AppComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    vm = this;
+    this.state = {
+      city: '',
+      cityId: ''
+    };
+  }
   componentDidMount() {
-    WeatherAppStore.addChangeListener(this.onChange);
-  };
+    MainStore.addChangeListener(this.onChange);
+  }
   componentWillUnmount() {
-    WeatherAppStore.removeChangeListener(this.onChange);
+    MainStore.removeChangeListener(this.onChange);
   }
   render() {
     return (
       <div className="index">
         <pre>App</pre>
         <SearchBlockComponent city={this.props.city}/>
-        <ResultsBlockComponent city={this.props.city}/>
+        <ResultsBlockComponent cityId={this.state.cityId}/>
       </div>
     );
   }
   onChange() {
-    console.log('change main app');
-    const city = WeatherAppStore.getCity();
-    this.setState({
+    const city = MainStore.getCity();
+    vm.setState({
       city: city.name,
       cityId: city._id
     });
   }
 }
-
-// AppComponent.defaultProps = {
-//   city: '',
-//   cityId: ''
-// };
 
 export default AppComponent;

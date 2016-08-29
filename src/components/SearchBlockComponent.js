@@ -5,7 +5,7 @@ import ResultsListComponent from './ResultsListComponent';
 import SearchBlockActions from 'actions/SearchBlockActions';
 import SearchBlockStore from 'stores/SearchBlockStore';
 
-require('styles//SearchBlock.scss');
+require('styles/SearchBlock.scss');
 var vm;
 class SearchBlockComponent extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class SearchBlockComponent extends React.Component {
   }
   componentDidMount() {
     SearchBlockStore.addChangeListener(this.onChange);
-  };
+  }
   componentWillUnmount() {
     SearchBlockStore.removeChangeListener(this.onChange);
   }

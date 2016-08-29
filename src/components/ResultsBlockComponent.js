@@ -1,13 +1,50 @@
 'use strict';
 
 import React from 'react';
+import ResultsBlockActions from 'actions/ResultsBlockActions';
+import ResultsBlockStore from 'stores/ResultsBlockStore';
 
 require('styles//ResultsBlock.scss');
 
+var vm;
 
 class ResultsBlockComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    vm = this;
+    this.state = {
+      forecast: {
+          'weather': [
+            {
+              'description': '',
+              'icon': ''
+            }
+          ],
+          'main': {
+              'temp': 0,
+              'temp_min': 0,
+              'temp_max': 0
+          },
+          'sys': {
+              'country': ''
+          },
+          'name': ''
+      }
+    };
+  }
+  componentDidMount() {
+    ResultsBlockStore.addChangeListener(this.onChange);
+  }
+  componentWillUnmount() {
+    ResultsBlockStore.removeChangeListener(this.onChange);
+  }
+  componentWillReceiveProps(newProps) {
+    if (newProps.cityId) {
+      ResultsBlockActions.getWeatherFromApi(newProps.cityId);
+    }
+  }
   render() {
-    let forecast = this.props.forecast;
+    let forecast = this.state.forecast;
     let classes = '';
     let iconUrl = '';
     if (forecast.weather[0].icon === '') {
@@ -30,6 +67,11 @@ class ResultsBlockComponent extends React.Component {
       </div>
     );
   }
+  onChange() {
+    vm.setState({
+      forecast: ResultsBlockStore.getForecast()
+    });
+  }
 }
 
 ResultsBlockComponent.displayName = 'ResultsBlockComponent';
@@ -37,23 +79,7 @@ ResultsBlockComponent.displayName = 'ResultsBlockComponent';
 // Uncomment properties you need
 // ResultsBlockComponent.propTypes = {};
 ResultsBlockComponent.defaultProps = {
-  forecast: {
-      'weather': [
-        {
-          'description': '',
-          'icon': ''
-        }
-      ],
-      'main': {
-          'temp': 0,
-          'temp_min': 0,
-          'temp_max': 0
-      },
-      'sys': {
-          'country': ''
-      },
-      'name': ''
-  }
+  cityId: ''
 };
 
 export default ResultsBlockComponent;

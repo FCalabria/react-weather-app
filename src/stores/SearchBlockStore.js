@@ -6,7 +6,7 @@ let fullCitiesList = [];
 let suggestedCities = [];
 
 function setCities(citiesArray) {
-  fullCitiesList = citiesArray;
+  fullCitiesList = _.uniqBy(citiesArray, 'name');
 }
 
 function searchSuggestedCities(city) {
@@ -17,19 +17,12 @@ function searchSuggestedCities(city) {
     let toPush = _.find(fullCitiesList, (cityObject) => filtered.indexOf(cityObject) === -1 && cityObject.name.toLowerCase().indexOf(city) !== -1);
     toPush !== undefined ? filtered.push(toPush) : outOfWhile = true;
   }
+  //TODO: sort list alphabetically &/or by country. Preferently, detect user country and put that cities first.
   suggestedCities = filtered;
 }
 
-function testFunction(something) {
-  console.debug(something);
-}
-
-
 const SearchBlockStore = _.extend({}, EventEmitter.prototype, {
-  getSuggestedCities: () => {
-    return suggestedCities;
-  },
-
+  getSuggestedCities: () => suggestedCities,
   emitChange: () => {
     SearchBlockStore.emit('change');
   },
